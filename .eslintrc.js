@@ -94,7 +94,7 @@ module.exports = {
           {
             files: '*.{ts,tsx,js,jsx}',
             options: {
-              tabWidth: 4,
+              tabWidth: 2,
             },
           },
         ],
