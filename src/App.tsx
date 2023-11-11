@@ -1,11 +1,19 @@
 import React from 'react'
 
-import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
 
-import './App.css'
+import { Header } from './components/Header'
 
-function App() {
-  return <Button>Hello World!!</Button>
+function App(): React.ReactElement {
+  return (
+    <Stack
+      height="100vh"
+      spacing={3}
+      sx={(theme) => ({ borderTop: `4px ${theme.palette.primary.main} solid` })}
+    >
+      <Header />
+    </Stack>
+  )
 }
 
 export default App

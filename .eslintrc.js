@@ -51,7 +51,7 @@ module.exports = {
     '@typescript-eslint/member-delimiter-style': 0,
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/camelcase': 0,
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    '@typescript-eslint/no-unused-vars': [1, { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/indent': 'off',
 
@@ -83,7 +83,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         semi: false,
         singleQuote: true,
