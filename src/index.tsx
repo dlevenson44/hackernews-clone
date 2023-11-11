@@ -36,7 +36,7 @@ const RootComponent = () => {
           },
         },
       }),
-    [mode],
+    [mode]
   )
 
   return (

@@ -10,10 +10,10 @@ import { fetchArticles } from '../../redux/fetching/fetchingSlice'
 
 const NewsFeed: React.FunctionComponent = () => {
   const dispatch = useDispatch()
-  const { loading, renderedArticles } = useSelector(
+  const { loading, renderedArticleIds } = useSelector(
+    // update type to pull from slice
     (state: any) => state.fetching
   )
-  console.log('aid: ', renderedArticles)
 
   React.useEffect(() => {
     dispatch(fetchArticles())
@@ -27,15 +27,18 @@ const NewsFeed: React.FunctionComponent = () => {
           <CircularProgress />
         </Stack>
       )}
-      {!renderedArticles && !loading && (
+      {!renderedArticleIds && !loading && (
         <Stack direction="row" justifyContent="center">
           <Typography>No articles found!</Typography>
         </Stack>
       )}
-      {renderedArticles &&
-        renderedArticles.map((article: number, idx: number) => (
-          <ArticleCard key={article} articleId={article} idx={idx} />
-        ))}
+      {renderedArticleIds && (
+        <Stack spacing={3} alignItems="center">
+          {renderedArticleIds.map((article: number, idx: number) => (
+            <ArticleCard key={article} articleId={article} idx={idx} />
+          ))}
+        </Stack>
+      )}
     </Stack>
   )
 }

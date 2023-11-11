@@ -1,22 +1,32 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import type { PayloadAction, AnyAction } from '@reduxjs/toolkit'
 
-interface InitialState {
+export interface InitialState {
   loading: boolean
   articleIds: number[]
-  renderedArticles: number[]
+  renderedArticleIds: number[]
+}
+
+interface ArticleData {
+  by: string
+  descendants: number
+  id: number
+  kids: number[]
+  score: number
+  time: number
+  title: string
+  type: string
+  url: string
 }
 
 const initialState: InitialState = {
   loading: false,
   articleIds: [],
-  renderedArticles: [],
+  renderedArticleIds: [],
 }
 
 export const fetchArticles: any = createAsyncThunk(
-  'counter/articles',
+  'articles/articles',
   async () => {
-    console.log(234234234234234)
     const res = await fetch(
       'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty'
     ).then((data) => data.json())
@@ -24,10 +34,14 @@ export const fetchArticles: any = createAsyncThunk(
   }
 )
 
-export const fetchingSlice: any = createSlice({
-  name: 'counter',
+export const fetchingSlice = createSlice({
+  name: 'articles',
   initialState,
-  reducers: {},
+  reducers: {
+    // setRenderedArticleData: (state, action) => {
+    //   state.renderedArticleData = [...state.renderedArticleData, action.payload]
+    // },
+  },
   extraReducers: {
     [fetchArticles.pending]: (state) => {
       state.loading = true
@@ -35,11 +49,11 @@ export const fetchingSlice: any = createSlice({
     [fetchArticles.fulfilled]: (state, action) => {
       state.loading = false
       state.articleIds = action.payload
-      state.renderedArticles = action.payload.slice(0, 25)
-    },
+      state.renderedArticleIds = action.payload.slice(0, 25)
+    }
   },
 })
 
-export const { fetchArticleIds } = fetchingSlice.actions
+// export const { setRenderedArticleData } = fetchingSlice.actions
 
 export default fetchingSlice.reducer
