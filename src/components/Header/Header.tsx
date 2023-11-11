@@ -12,6 +12,7 @@ const Header: React.FunctionComponent = () => (
     justifyContent="space-between"
     alignItems="center"
     p={3}
+    px={5}
   >
     <Stack
       direction="row"
