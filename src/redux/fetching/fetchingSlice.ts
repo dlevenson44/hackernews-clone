@@ -1,15 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-export interface ArticlesState {
+export interface InitialState {
   loading: boolean
   articleIds: number[]
   renderedArticleIds: number[]
+  // update type
+  starredArticleIds: any[]
+  articleView: 'latest' | 'starred'
 }
 
-const initialState: ArticlesState = {
+const initialState: InitialState = {
   loading: false,
   articleIds: [],
   renderedArticleIds: [],
+  starredArticleIds: [],
+  articleView: 'latest',
 }
 
 export const fetchArticles: any = createAsyncThunk(
@@ -26,9 +31,17 @@ export const fetchingSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
-    // setRenderedArticleData: (state, action) => {
-    //   state.renderedArticleData = [...state.renderedArticleData, action.payload]
-    // },
+    setArticleView: (state, action) => {
+      state.articleView = action.payload
+    },
+    setStarredArticle: (state, action) => {
+      state.starredArticleIds = [...state.starredArticleIds, action.payload]
+    },
+    removeStarredArticle: (state, action) => {
+      state.starredArticleIds = state.starredArticleIds.filter(
+        ({ articleId }) => articleId !== action.payload
+      )
+    },
   },
   extraReducers: {
     [fetchArticles.pending]: (state) => {
@@ -42,6 +55,7 @@ export const fetchingSlice = createSlice({
   },
 })
 
-// export const { setRenderedArticleData } = fetchingSlice.actions
+export const { setArticleView, setStarredArticle, removeStarredArticle } =
+  fetchingSlice.actions
 
 export default fetchingSlice.reducer

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography'
 import type { ArticleData } from '../../types/articles'
 
 interface ArticleCardHeaderProps {
-  articleData: ArticleData
+  articleData?: ArticleData
   idx: number
 }
 
@@ -14,7 +14,9 @@ const ArticleCardHeader: React.FunctionComponent<ArticleCardHeaderProps> = ({
   articleData,
   idx,
 }) => {
-  const sanitizedUrl = articleData?.url.slice(8).split('/')[0]
+  const sanitizedUrl = articleData?.url
+    ? articleData?.url.slice(8).split('/')[0]
+    : ''
 
   return (
     <Stack direction="row" spacing={3}>

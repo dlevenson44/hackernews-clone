@@ -4,12 +4,15 @@ import Divider from '@mui/material/Divider'
 import Link from '@mui/material/Link'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
+import { useDispatch, useSelector } from 'react-redux'
 
-type SelectedView = 'latest' | 'starred'
+import { setArticleView } from '../../redux/fetching/fetchingSlice'
+import type { RootState } from '../../redux/store'
 
 const LatestStarredToggle: React.FunctionComponent = () => {
+  const dispatch = useDispatch()
   const theme = useTheme()
-  const [selectedView, setSelectedView] = React.useState<SelectedView>('latest')
+  const { articleView } = useSelector((state: RootState) => state.fetching)
 
   const inactiveLinkColor = React.useMemo(
     () => (theme.palette.mode === 'light' ? 'primary.dark' : 'primary.light'),
@@ -19,13 +22,13 @@ const LatestStarredToggle: React.FunctionComponent = () => {
   return (
     <Stack direction="row" spacing={1}>
       <Link
-        onClick={() => setSelectedView('latest')}
-        color={selectedView === 'latest' ? 'primary.main' : inactiveLinkColor}
+        onClick={() => dispatch(setArticleView('latest'))}
+        color={articleView === 'latest' ? 'primary.main' : inactiveLinkColor}
         underline="none"
         sx={{
           cursor: 'pointer',
           fontSize: '14px',
-          fontWeight: selectedView === 'latest' ? 700 : 0,
+          fontWeight: articleView === 'latest' ? 700 : 0,
           lineHeight: '19px',
           letterSpacing: '0em',
           textAlign: 'left',
@@ -39,13 +42,13 @@ const LatestStarredToggle: React.FunctionComponent = () => {
         sx={{ backgroundColor: 'primary.dark' }}
       />
       <Link
-        onClick={() => setSelectedView('starred')}
-        color={selectedView === 'starred' ? 'primary.main' : inactiveLinkColor}
+        onClick={() => dispatch(setArticleView('starred'))}
+        color={articleView === 'starred' ? 'primary.main' : inactiveLinkColor}
         underline="none"
         sx={{
           cursor: 'pointer',
           fontSize: '14px',
-          fontWeight: selectedView === 'starred' ? 700 : 0,
+          fontWeight: articleView === 'starred' ? 700 : 0,
           lineHeight: '19px',
           letterSpacing: '0em',
           textAlign: 'left',

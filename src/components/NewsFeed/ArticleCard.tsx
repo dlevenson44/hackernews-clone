@@ -7,12 +7,14 @@ import ArticleCardHeader from './ArticleCardHeader'
 import type { ArticleData } from '../../types/articles'
 
 interface ArticleCardProps {
-  articleId: number
+  articleId?: number
+  starredArticleData?: ArticleData
   idx: number
 }
 
 const ArticleCard: React.FunctionComponent<ArticleCardProps> = ({
   articleId,
+  starredArticleData,
   idx,
 }) => {
   const [articleData, setArticleData] = React.useState<
@@ -20,19 +22,26 @@ const ArticleCard: React.FunctionComponent<ArticleCardProps> = ({
   >()
 
   React.useEffect(() => {
-    fetch(
-      `https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`
-    )
-      .then((res) => res.json())
-      .then((res) => setArticleData(res))
-  }, [setArticleData, articleId])
+    if (!starredArticleData) {
+      fetch(
+        `https://hacker-news.firebaseio.com/v0/item/${articleId}.json?print=pretty`
+      )
+        .then((res) => res.json())
+        .then((res) => setArticleData(res))
+    }
+  }, [setArticleData, articleId, starredArticleData])
 
-  if (!articleData) return null
+  if (!articleData && !starredArticleData) return null
 
   return (
     <Stack justifyContent="center" spacing={1} width="90%">
-      <ArticleCardHeader articleData={articleData} idx={idx} />
-      <ArticleCardDetails articleData={articleData} />
+      <ArticleCardHeader
+        articleData={starredArticleData ? starredArticleData : articleData}
+        idx={idx}
+      />
+      <ArticleCardDetails
+        articleData={starredArticleData ? starredArticleData : articleData}
+      />
     </Stack>
   )
 }

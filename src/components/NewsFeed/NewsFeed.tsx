@@ -11,16 +11,20 @@ import type { RootState } from '../../redux/store'
 
 const NewsFeed: React.FunctionComponent = () => {
   const dispatch = useDispatch()
-  const { loading, renderedArticleIds } = useSelector(
-    (state: RootState) => state.fetching
-  )
+  const { loading, renderedArticleIds, starredArticleIds, articleView } =
+    useSelector((state: RootState) => state.fetching)
 
   React.useEffect(() => {
     dispatch(fetchArticles())
   }, [dispatch])
+  console.log(
+    'article view and length:  ',
+    articleView,
+    !!starredArticleIds.length
+  )
 
   return (
-    <Stack sx={{ borderBottom: '4px solid red' }}>
+    <Stack>
       {loading && (
         <Stack direction="row" justifyContent="center">
           {' '}
@@ -32,11 +36,28 @@ const NewsFeed: React.FunctionComponent = () => {
           <Typography>No articles found!</Typography>
         </Stack>
       )}
-      {renderedArticleIds && (
+      {articleView === 'latest' && renderedArticleIds && (
         <Stack spacing={3} alignItems="center">
           {renderedArticleIds.map((article: number, idx: number) => (
             <ArticleCard key={article} articleId={article} idx={idx} />
           ))}
+        </Stack>
+      )}
+      {articleView === 'starred' &&
+        !!starredArticleIds.length &&
+        starredArticleIds.map(({ articleData }, idx) => (
+          <Stack spacing={3} alignItems="center">
+            <ArticleCard
+              key={articleData?.id}
+              starredArticleData={articleData}
+              idx={idx}
+            />
+          </Stack>
+        ))}
+
+      {articleView === 'starred' && !starredArticleIds.length && (
+        <Stack alignItems="center">
+          <Typography variant="h3">No Starred Articles</Typography>
         </Stack>
       )}
     </Stack>
