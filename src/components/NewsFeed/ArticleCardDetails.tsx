@@ -8,8 +8,10 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 
+import type { ArticleData } from '../../types/articles'
+
 interface ArticleCardDetailsProps {
-  articleData: Record<string, any>
+  articleData: ArticleData
 }
 
 const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({

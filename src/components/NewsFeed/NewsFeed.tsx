@@ -7,12 +7,12 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import ArticleCard from './ArticleCard'
 import { fetchArticles } from '../../redux/fetching/fetchingSlice'
+import type { RootState } from '../../redux/store'
 
 const NewsFeed: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const { loading, renderedArticleIds } = useSelector(
-    // update type to pull from slice
-    (state: any) => state.fetching
+    (state: RootState) => state.fetching
   )
 
   React.useEffect(() => {

@@ -1,24 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-export interface InitialState {
+export interface ArticlesState {
   loading: boolean
   articleIds: number[]
   renderedArticleIds: number[]
 }
 
-interface ArticleData {
-  by: string
-  descendants: number
-  id: number
-  kids: number[]
-  score: number
-  time: number
-  title: string
-  type: string
-  url: string
-}
-
-const initialState: InitialState = {
+const initialState: ArticlesState = {
   loading: false,
   articleIds: [],
   renderedArticleIds: [],

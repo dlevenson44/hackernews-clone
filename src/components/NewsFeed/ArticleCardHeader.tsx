@@ -3,8 +3,10 @@ import React from 'react'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 
+import type { ArticleData } from '../../types/articles'
+
 interface ArticleCardHeaderProps {
-  articleData: Record<string, any>
+  articleData: ArticleData
   idx: number
 }
 
@@ -40,7 +42,6 @@ const ArticleCardHeader: React.FunctionComponent<ArticleCardHeaderProps> = ({
       </Typography>
       <Typography
         color="#00000080"
-        fontFamily="Open Sans"
         fontSize="10px"
         fontWeight={400}
         lineHeight="14px"
