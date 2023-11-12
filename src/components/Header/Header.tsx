@@ -6,13 +6,19 @@ import ColorModeToggle from './ColorModeToggle'
 import HeaderTitle from './HeaderTitle'
 import LatestStarredToggle from './LatestStarredToggle'
 
-const Header: React.FunctionComponent = () => (
+interface HeaderProps {
+  hideLatestStarredToggle?: boolean
+}
+
+const Header: React.FunctionComponent<HeaderProps> = ({
+  hideLatestStarredToggle,
+}) => (
   <Stack
     direction="row"
     justifyContent="space-between"
     alignItems="center"
     p={3}
-    px={12}
+    px={9}
   >
     <Stack
       direction="row"
@@ -21,7 +27,7 @@ const Header: React.FunctionComponent = () => (
       alignItems="center"
     >
       <HeaderTitle />
-      <LatestStarredToggle />
+      {!hideLatestStarredToggle && <LatestStarredToggle />}
     </Stack>
     <ColorModeToggle />
   </Stack>

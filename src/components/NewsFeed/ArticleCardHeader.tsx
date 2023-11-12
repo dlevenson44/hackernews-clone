@@ -3,6 +3,7 @@ import React from 'react'
 import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
+import { Link } from 'react-router-dom'
 
 import type { ArticleData } from '../../types/articles'
 
@@ -34,17 +35,23 @@ const ArticleCardHeader: React.FunctionComponent<ArticleCardHeaderProps> = ({
       >
         {idx + 1}.
       </Typography>
-      <Typography
-        color={theme.palette.mode === 'light' ? '#000000' : '#FFFFFF'}
-        fontFamily="Ubuntu, monospace"
-        fontSize="18px"
-        fontWeight={700}
-        lineHeight="18px"
-        letterSpacing="0em"
-        textAlign="left"
+      <Link
+        to={`/article/${articleData?.id}`}
+        state={articleData}
+        style={{ textDecoration: 'none' }}
       >
-        {articleData?.title}
-      </Typography>
+        <Typography
+          color={theme.palette.mode === 'light' ? '#000000' : '#FFFFFF'}
+          fontFamily="Ubuntu, monospace"
+          fontSize="18px"
+          fontWeight={700}
+          lineHeight="18px"
+          letterSpacing="0em"
+          textAlign="left"
+        >
+          {articleData?.title}
+        </Typography>
+      </Link>
       <Typography
         color={theme.palette.mode === 'light' ? '#00000080' : '#FFFFFF80'}
         fontSize="10px"

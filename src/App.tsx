@@ -1,20 +1,20 @@
 import React from 'react'
 
-import Stack from '@mui/material/Stack'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import { Header } from './components/Header'
+import { ArticleDetails } from './components/ArticleDetails'
 import { NewsFeed } from './components/NewsFeed'
+import { NotFound } from './components/Shared'
 
 function App(): React.ReactElement {
   return (
-    <Stack
-      height="100vh"
-      spacing={3}
-      sx={(theme) => ({ borderTop: `4px ${theme.palette.primary.main} solid` })}
-    >
-      <Header />
-      <NewsFeed />
-    </Stack>
+    <Router>
+      <Routes>
+        <Route path="/" element={<NewsFeed />} />
+        <Route path="/article/:slug" element={<ArticleDetails />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   )
 }
 

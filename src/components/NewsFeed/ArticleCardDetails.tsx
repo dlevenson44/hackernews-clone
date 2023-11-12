@@ -37,7 +37,6 @@ const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
   const isArticleStarred = starredArticleIds.filter(
     ({ articleId }) => articleId === articleData?.id
   ).length
-  console.log('starredArticleIds:  ', starredArticleIds, isArticleStarred)
 
   const handleStarClick = (
     actionType: 'addStar' | 'removeStar'

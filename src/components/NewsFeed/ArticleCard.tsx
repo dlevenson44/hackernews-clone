@@ -34,7 +34,8 @@ const ArticleCard: React.FunctionComponent<ArticleCardProps> = ({
   if (!articleData && !starredArticleData) return null
 
   return (
-    <Stack justifyContent="center" spacing={1} width="90%">
+    // <Stack justifyContent="center" spacing={1} width="100%">
+    <Stack px={9}>
       <ArticleCardHeader
         articleData={starredArticleData ? starredArticleData : articleData}
         idx={idx}
