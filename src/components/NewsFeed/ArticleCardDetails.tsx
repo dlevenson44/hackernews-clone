@@ -5,6 +5,7 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Stack from '@mui/material/Stack'
+import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,6 +28,7 @@ interface HandleStarClick {
 const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
   articleData,
 }) => {
+  const theme = useTheme()
   const dispatch = useDispatch()
   const { starredArticleIds } = useSelector(
     (state: RootState) => state.articles
@@ -48,7 +50,7 @@ const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
     <Stack direction="row" spacing={1} alignItems="center" pl={6}>
       <Typography
         variant="body1"
-        color="#00000080"
+        color={theme.palette.mode === 'light' ? '#00000080' : '#FFFFFF80'}
         fontSize="14px"
         fontWeight={400}
         lineHeight="14px"
@@ -61,11 +63,14 @@ const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
       <Divider
         flexItem
         orientation="vertical"
-        sx={{ backgroundColor: '#00000080' }}
+        sx={{
+          backgroundColor:
+            theme.palette.mode === 'light' ? '#00000080' : '#FFFFFF80',
+        }}
       />
       <Typography
         variant="body1"
-        color="#00000080"
+        color={theme.palette.mode === 'light' ? '#00000080' : '#FFFFFF80'}
         fontSize="14px"
         fontWeight={400}
         lineHeight="14px"
@@ -77,7 +82,10 @@ const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
       <Divider
         flexItem
         orientation="vertical"
-        sx={{ backgroundColor: '#00000080' }}
+        sx={{
+          backgroundColor:
+            theme.palette.mode === 'light' ? '#00000080' : '#FFFFFF80',
+        }}
       />
       <Stack direction="row" alignItems="center">
         <IconButton
@@ -91,7 +99,10 @@ const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
             <StarBorderOutlinedIcon sx={{ fontSize: '14px' }} />
           )}
         </IconButton>
-        <Typography color="#00000080" fontSize="14px">
+        <Typography
+          color={theme.palette.mode === 'light' ? '#00000080' : '#FFFFFF80'}
+          fontSize="14px"
+        >
           {isArticleStarred ? 'saved' : 'save'}
         </Typography>
       </Stack>

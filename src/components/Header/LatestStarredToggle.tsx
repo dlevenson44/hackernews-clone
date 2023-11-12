@@ -39,7 +39,10 @@ const LatestStarredToggle: React.FunctionComponent = () => {
       <Divider
         flexItem
         orientation="vertical"
-        sx={{ backgroundColor: 'primary.dark' }}
+        sx={{
+          backgroundColor:
+            theme.palette.mode === 'light' ? 'primary.dark' : '#FFFFFF',
+        }}
       />
       <Link
         onClick={() => dispatch(setArticleView('starred'))}
