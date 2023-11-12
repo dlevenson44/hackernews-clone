@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   setStarredArticle,
   removeStarredArticle,
-} from '../../redux/fetching/fetchingSlice'
+} from '../../redux/articles/articlesSlice'
 import type { RootState } from '../../redux/store'
 import type { ArticleData } from '../../types/articles'
 
@@ -29,7 +29,7 @@ const ArticleCardDetails: React.FunctionComponent<ArticleCardDetailsProps> = ({
 }) => {
   const dispatch = useDispatch()
   const { starredArticleIds } = useSelector(
-    (state: RootState) => state.fetching
+    (state: RootState) => state.articles
   )
 
   const isArticleStarred = starredArticleIds.filter(

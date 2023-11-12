@@ -6,13 +6,13 @@ import Typography from '@mui/material/Typography'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ArticleCard from './ArticleCard'
-import { fetchArticles } from '../../redux/fetching/fetchingSlice'
+import { fetchArticles } from '../../redux/articles/articlesSlice'
 import type { RootState } from '../../redux/store'
 
 const NewsFeed: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const { loading, renderedArticleIds, starredArticleIds, articleView } =
-    useSelector((state: RootState) => state.fetching)
+    useSelector((state: RootState) => state.articles)
 
   React.useEffect(() => {
     dispatch(fetchArticles())

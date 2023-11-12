@@ -1,11 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
+import type { ArticleData } from '../../types/articles'
+
+interface StarredArticles {
+  articleId: number
+  articleData: ArticleData
+}
+
 export interface InitialState {
   loading: boolean
   articleIds: number[]
   renderedArticleIds: number[]
   // update type
-  starredArticleIds: any[]
+  starredArticleIds: StarredArticles[]
   articleView: 'latest' | 'starred'
 }
 
@@ -27,7 +34,7 @@ export const fetchArticles: any = createAsyncThunk(
   }
 )
 
-export const fetchingSlice = createSlice({
+export const articlesSlice = createSlice({
   name: 'articles',
   initialState,
   reducers: {
@@ -50,12 +57,12 @@ export const fetchingSlice = createSlice({
     [fetchArticles.fulfilled]: (state, action) => {
       state.loading = false
       state.articleIds = action.payload
-      state.renderedArticleIds = action.payload.slice(0, 25)
-    }
+      state.renderedArticleIds = action.payload.slice(0, 12)
+    },
   },
 })
 
 export const { setArticleView, setStarredArticle, removeStarredArticle } =
-  fetchingSlice.actions
+  articlesSlice.actions
 
-export default fetchingSlice.reducer
+export default articlesSlice.reducer

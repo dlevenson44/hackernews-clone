@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import favoritesReducer from './favorites/favoritesSlice'
-import fetchingReducer from './fetching/fetchingSlice'
+import articlesReducer from './articles/articlesSlice'
 
 export const store = configureStore({
   reducer: {
-    favorites: favoritesReducer,
-    fetching: fetchingReducer,
+    articles: articlesReducer,
   },
 })
 

@@ -6,13 +6,13 @@ import Stack from '@mui/material/Stack'
 import { useTheme } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setArticleView } from '../../redux/fetching/fetchingSlice'
+import { setArticleView } from '../../redux/articles/articlesSlice'
 import type { RootState } from '../../redux/store'
 
 const LatestStarredToggle: React.FunctionComponent = () => {
   const dispatch = useDispatch()
   const theme = useTheme()
-  const { articleView } = useSelector((state: RootState) => state.fetching)
+  const { articleView } = useSelector((state: RootState) => state.articles)
 
   const inactiveLinkColor = React.useMemo(
     () => (theme.palette.mode === 'light' ? 'primary.dark' : 'primary.light'),
