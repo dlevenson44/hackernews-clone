@@ -1,18 +1,28 @@
 import React from 'react'
 
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useSelector, useDispatch } from 'react-redux'
 
 import ArticleCard from './ArticleCard'
-import { fetchArticles } from '../../redux/articles/articlesSlice'
+import {
+  fetchArticles,
+  showMoreToggle,
+} from '../../redux/articles/articlesSlice'
 import type { RootState } from '../../redux/store'
 
 const NewsFeed: React.FunctionComponent = () => {
   const dispatch = useDispatch()
-  const { loading, renderedArticleIds, starredArticleIds, articleView } =
-    useSelector((state: RootState) => state.articles)
+  const {
+    loading,
+    renderedArticleIds,
+    starredArticleIds,
+    articleView,
+    showingMoreArticles,
+  } = useSelector((state: RootState) => state.articles)
 
   React.useEffect(() => {
     dispatch(fetchArticles())
@@ -60,6 +70,27 @@ const NewsFeed: React.FunctionComponent = () => {
           <Typography variant="h3">No Starred Articles</Typography>
         </Stack>
       )}
+      <Button
+        variant="contained"
+        onClick={() => dispatch(showMoreToggle())}
+        sx={{
+          alignSelf: 'start',
+          ml: 10,
+          my: 3,
+          color: '#FFFFFF',
+          textTransform: 'lowercase',
+        }}
+      >
+        {showingMoreArticles ? 'show less' : 'show more'}
+      </Button>
+      <Box
+        sx={{
+          borderBottom: '#FE7139 solid 2px',
+          width: '90%',
+          alignSelf: 'center',
+          mb: 5,
+        }}
+      />
     </Stack>
   )
 }

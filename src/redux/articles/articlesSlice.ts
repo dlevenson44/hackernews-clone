@@ -11,9 +11,9 @@ export interface InitialState {
   loading: boolean
   articleIds: number[]
   renderedArticleIds: number[]
-  // update type
   starredArticleIds: StarredArticles[]
   articleView: 'latest' | 'starred'
+  showingMoreArticles: boolean
 }
 
 const initialState: InitialState = {
@@ -22,6 +22,7 @@ const initialState: InitialState = {
   renderedArticleIds: [],
   starredArticleIds: [],
   articleView: 'latest',
+  showingMoreArticles: false,
 }
 
 export const fetchArticles: any = createAsyncThunk(
@@ -49,6 +50,14 @@ export const articlesSlice = createSlice({
         ({ articleId }) => articleId !== action.payload
       )
     },
+    showMoreToggle: (state) => {
+      state.showingMoreArticles = !state.showingMoreArticles
+      if (state.showingMoreArticles) {
+        state.renderedArticleIds = state.articleIds.slice(0, 25)
+      } else {
+        state.renderedArticleIds = state.articleIds.slice(0, 12)
+      }
+    },
   },
   extraReducers: {
     [fetchArticles.pending]: (state) => {
@@ -62,7 +71,11 @@ export const articlesSlice = createSlice({
   },
 })
 
-export const { setArticleView, setStarredArticle, removeStarredArticle } =
-  articlesSlice.actions
+export const {
+  setArticleView,
+  setStarredArticle,
+  removeStarredArticle,
+  showMoreToggle,
+} = articlesSlice.actions
 
 export default articlesSlice.reducer
