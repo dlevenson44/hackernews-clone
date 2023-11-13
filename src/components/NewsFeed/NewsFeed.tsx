@@ -13,7 +13,7 @@ import {
   showMoreToggle,
 } from '../../redux/articles/articlesSlice'
 import type { RootState } from '../../redux/store'
-import { Wrapper } from '../Shared'
+import { Wrapper, LatestStarredToggle } from '../Shared'
 
 const NewsFeed: React.FunctionComponent = () => {
   const dispatch = useDispatch()
@@ -88,6 +88,18 @@ const NewsFeed: React.FunctionComponent = () => {
             mb: 5,
           }}
         />
+        <Stack alignItems="center" mb={10} spacing={2}>
+          <Typography
+            fontSize="16px"
+            fontWeight={700}
+            lineHeight="22px"
+            letterSpacing="0em"
+            textAlign="left"
+          >
+            Hacker News
+          </Typography>
+          <LatestStarredToggle />
+        </Stack>
       </Stack>
     </Wrapper>
   )

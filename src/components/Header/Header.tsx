@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack'
 
 import ColorModeToggle from './ColorModeToggle'
 import HeaderTitle from './HeaderTitle'
-import LatestStarredToggle from './LatestStarredToggle'
+import { LatestStarredToggle } from '../Shared'
 
 interface HeaderProps {
   hideLatestStarredToggle?: boolean
